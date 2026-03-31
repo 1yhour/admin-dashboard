@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('layout.app');
-})->name('home');
+use App\Http\Controllers\AdminDashboardControl;
+Route::redirect('/','/admin/dashboard');
+Route::controller(AdminDashboardControl::class)->group(function () {
+    Route::get('/admin/dashboard', 'admin')->name('admin.dashboard');
+    Route::get('/admin/user', 'user')->name('admin.user');
+});
